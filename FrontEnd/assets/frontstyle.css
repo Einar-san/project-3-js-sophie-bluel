@@ -73,3 +73,6 @@ footer {
     justify-content: flex-end;
 }
 
+.error {
+    color: red;
+}

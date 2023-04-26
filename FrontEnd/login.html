@@ -26,7 +26,7 @@
 <main>
     <div class="login-form">
         <div class="title"><h2>Log in</h2></div>
-        <form action="">
+        <form>
             <div class="form-control">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email">
@@ -35,7 +35,10 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password">
             </div>
-            <button type="submit">Se connecter</button>
+            <div class="form-control">
+                <p class="error"></p>
+            </div>
+            <button type="submit" id="btn-submit">Se connecter</button>
         </form>
         <div class="reset"><a href="#">mot de passe oublié</a></div>
     </div>
@@ -48,5 +51,7 @@
         </ul>
     </nav>
 </footer>
+
+<script src="login.js"></script>
 </body>
 </html>
