@@ -23,7 +23,7 @@ async function connected () {
         logs = JSON.parse(document.cookie)
         if(logs.userId === 1) {
             logoutBtn()
-            editMod()
+            //editMod()
         }
         else {
 
