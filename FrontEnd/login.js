@@ -21,7 +21,7 @@ async function fetchLogin (form) {
         let credentials = ''
         await response.json().then(body => credentials = body)
 
-        // L'utilisateur est connecté, tant que le navigateur est ouvert.
+        // L'utilisateur doit étre connecté, tant que le navigateur est ouvert.
         await localStorage.setItem( 'userCredentials', JSON.stringify(credentials))
         window.location.href = 'index.html'
 

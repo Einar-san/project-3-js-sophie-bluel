@@ -17,7 +17,7 @@ async function logoutBtn () {
 }*/
 async function connected () {
 
-    // L'utilisateur est connecté, tant que le navigateur est ouvert.
+    // L'utilisateur doit étre connecté, tant que le navigateur est ouvert.
     logsLocal  = await JSON.parse(localStorage.getItem('userCredentials'))
     if( logsLocal != null && logsLocal.userId === 1) {
         logoutBtn()
