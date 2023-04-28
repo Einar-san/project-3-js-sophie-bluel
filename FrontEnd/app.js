@@ -1,5 +1,9 @@
 let wrapper = document.querySelector("#gallery")
+const filters = document.querySelector(".filters")
 let posts = []
+let category = []
+
+
 const articles =  async () => {
     try {
         const res = await fetch("http://localhost:5678/api/works", {
@@ -44,6 +48,7 @@ async function createArticles () {
     loader.innerText = 'chargement...'
     wrapper.append(loader)
 
+    createFilters(posts)
 
         loader.remove()
         for(let post of posts) {
@@ -62,55 +67,63 @@ async function filterFunction (filteredPosts) {
         wrapper.append(createFigure(post))
     }
 }
-
 function addFilterClass (filter) {
     let activeFilter = document.querySelector('.active')
     activeFilter.classList.remove('active')
     activeFilter = document.querySelector('.'+ filter)
     activeFilter.classList.add('active')
 }
+async function createFilters (posts) {
 
-document.querySelector('.objets').addEventListener('click', ()=> {
-
-    addFilterClass('objets')
-
-    let filteredPosts = []
-    for(post of posts) {
-        if(1 === post.categoryId) {
-            filteredPosts.push(post)
+    for (post of posts) {
+        if(!category.includes(post.category.name)) {
+            category.push(post.category.name)
         }
     }
-    filterFunction(filteredPosts)
+    let filterConstructor = document.createElement('button')
+    filterConstructor.classList.add('filter')
+    filterConstructor.classList.add('tout')
+    filterConstructor.classList.add('active')
+    filterConstructor.innerText = 'Tout'
+    filters.append(filterConstructor)
+    await createFilterEvent('tout')
 
-})
-
-document.querySelector('.appartements').addEventListener('click', ()=> {
-    addFilterClass('appartements')
-    let filteredPosts = []
-    for(post of posts) {
-        if(2 === post.categoryId) {
-            filteredPosts.push(post)
-        }
+   for (filter of category) {
+        filterConstructor = document.createElement('button')
+        filterConstructor.classList.add('filter')
+        let filterClass = filter.replace(/[ &]/g, "-")
+        filterConstructor.classList.add(filterClass)
+        filterConstructor.innerText = filter
+        filters.append(filterConstructor)
+        let className = filter
+        await createFilterEvent(className)
     }
-    filterFunction(filteredPosts)
-})
 
-document.querySelector('.hotel').addEventListener('click', ()=> {
-    addFilterClass('hotel')
-    let filteredPosts = []
-    for(post of posts) {
-        if(3 === post.categoryId) {
-            filteredPosts.push(post)
+}
+
+async function createFilterEvent (className) {
+    let classValid = className.replace(/[ &]/g, "-")
+    document.querySelector('.'+classValid).addEventListener('click', ()=> {
+
+        addFilterClass(classValid)
+
+        let filteredPosts = []
+        for(post of posts) {
+            if(className === 'tout') {
+                filteredPosts.push(post)
+            }
+            else if(className === post.category.name) {
+                filteredPosts.push(post)
+            }
         }
-    }
-    filterFunction(filteredPosts)
-})
+        filterFunction(filteredPosts)
 
-document.querySelector('.tout').addEventListener('click', ()=> {
-    addFilterClass('tout')
-    filterFunction(posts)
-})
+    })
+}
 
+window.addEventListener('beforeunload', function(event) {
+    localStorage.clear();
+});
 
 createArticles ()
 

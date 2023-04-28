@@ -1,11 +1,11 @@
-let logs = {}
-
+let logsSession  = {}
+let logsLocal  = {}
 async function logoutBtn () {
     const loginLink = document.querySelector('.login-link')
     loginLink.innerHTML = "Logout"
     loginLink.href='#'
     loginLink.addEventListener("click", () => {
-        document.cookie = ""
+        sessionStorage.clear();
         window.location.href = "index.html"
     })
 }
@@ -17,20 +17,17 @@ async function logoutBtn () {
 
 }*/
 async function connected () {
-    if (document.cookie === ""){
+
+    // L'utilisateur est connecté, tant que le navigateur est ouvert.
+    logsSession  = await JSON.parse(sessionStorage.getItem('userCredentials'))
+    logsLocal  = await JSON.parse(localStorage.getItem('userCredentials'))
+    if( (logsSession != null && logsSession.userId === 1) || (logsLocal != null && logsLocal.userId === 1)) {
+        logoutBtn()
+        //editMod()
     }
     else {
-        logs = JSON.parse(document.cookie)
-        if(logs.userId === 1) {
-            logoutBtn()
-            //editMod()
-        }
-        else {
 
-        }
     }
-
-
 }
 
 connected()

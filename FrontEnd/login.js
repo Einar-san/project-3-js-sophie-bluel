@@ -20,7 +20,10 @@ async function fetchLogin (form) {
     if (response.status === 200) {
         let credentials = ''
         await response.json().then(body => credentials = body)
-        document.cookie = JSON.stringify(credentials) + "; SameSite=None; Secure";
+
+        // L'utilisateur est connecté, tant que le navigateur est ouvert.
+        await sessionStorage.setItem( 'userCredentials', JSON.stringify(credentials))
+        await localStorage.setItem( 'userCredentials', JSON.stringify(credentials))
         window.location.href = 'index.html'
 
     }

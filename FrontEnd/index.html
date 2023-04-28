@@ -34,14 +34,24 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+	<!--<a href="#modal" class="modal-link">modale</a> WORK IN PROGRESS! -->  
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-        <div class="filtres">
-            <button class="filtre tout active">Tout</button>
-            <button class="filtre objets">Objets</button>
-            <button class="filtre appartements">Appartements</button>
-            <button class="filtre hotel">Hôtels & restaurants</button>
+        <div class="filters">
+
+
         </div>
+
+		<aside class="modal" id="modal" aria-hidden="true" role="complementary" aria-labelledby="gallery-modal" style="display:none;">
+			<div class="modal-content js-stop-modal">
+				<button class="js-close-modal">X</button>
+				<h2 id="gallery-modal">Galerie Photo</h2>
+				<div class="modal-cards"></div>
+				<button class="add-project">Ajouter une photo</button>
+				<a href="#">Supprimer la galerie</a>
+			</div>
+		</aside>
+
 		<div class="gallery" id="gallery">
 		</div>
 	</section>
@@ -70,5 +80,6 @@
 
 <script src="app.js"></script>
 <script src="auth.js"></script>
+<script src="modal.js"></script>
 </body>
 </html>
