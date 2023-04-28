@@ -1,4 +1,3 @@
-let logsSession  = {}
 let logsLocal  = {}
 async function logoutBtn () {
     const loginLink = document.querySelector('.login-link')
@@ -19,9 +18,8 @@ async function logoutBtn () {
 async function connected () {
 
     // L'utilisateur est connecté, tant que le navigateur est ouvert.
-    logsSession  = await JSON.parse(sessionStorage.getItem('userCredentials'))
     logsLocal  = await JSON.parse(localStorage.getItem('userCredentials'))
-    if( (logsSession != null && logsSession.userId === 1) || (logsLocal != null && logsLocal.userId === 1)) {
+    if( logsLocal != null && logsLocal.userId === 1) {
         logoutBtn()
         //editMod()
     }

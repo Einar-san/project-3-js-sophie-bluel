@@ -22,7 +22,6 @@ async function fetchLogin (form) {
         await response.json().then(body => credentials = body)
 
         // L'utilisateur est connecté, tant que le navigateur est ouvert.
-        await sessionStorage.setItem( 'userCredentials', JSON.stringify(credentials))
         await localStorage.setItem( 'userCredentials', JSON.stringify(credentials))
         window.location.href = 'index.html'
 
