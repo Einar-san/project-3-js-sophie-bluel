@@ -27,6 +27,7 @@ const articles =  async () => {
 function createFigure(post) {
 
     const figure = document.createElement('figure')
+    figure.setAttribute('data-id', post.id)
     const img = document.createElement('img')
     img.src = post.imageUrl
     img.alt = post.title
@@ -121,9 +122,7 @@ async function createFilterEvent (className) {
     })
 }
 
-window.addEventListener('beforeunload', function(event) {
-    localStorage.clear();
-});
+
 
 createArticles ()
 
