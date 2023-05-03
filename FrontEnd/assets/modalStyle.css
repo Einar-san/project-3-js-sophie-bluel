@@ -1,0 +1,364 @@
+
+
+
+.modal-link {
+    height: 30px;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: "Work Sans";
+    font-size: 14px;
+    color: black;
+    font-weight: normal;
+    padding-left: 30px;
+}
+
+.modal-link iframe {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-content {
+    width: 600px;
+    height: 700px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+
+}
+
+.project-modal-title {
+    font-family: 'Work Sans';
+    font-size: 26px;
+    font-weight: normal;
+    margin: 50px 0 45px 0 !important;
+    color: black;
+
+}
+/*--------------------------------------------------------------------*/
+.js-close-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.get-back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.modal-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    align-items: center;
+}
+.modal-container h2 {
+    font-family: "Work Sans";
+    font-size: 26px;
+    font-weight: normal;
+    color: black;
+    margin-bottom: 30px!important;
+    margin-top: 50px;
+}
+
+.project-container {
+    overflow: auto;
+    width: 560px;
+    height: 360px;
+    padding: 15px 60px 0 60px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-flow: row wrap;
+}
+
+
+
+.modal-card {
+    position: relative;
+    width: 75px;
+    margin:0 5px 15px 5px;
+}
+
+.project-img {
+    width: 100%;
+    height: auto;
+}
+
+.edit-link {
+    text-decoration: none;
+    font-family: 'Work Sans';
+    color: black;
+    font-size: 14px;
+}
+
+.modal-card a:hover {
+    font-weight: bold;
+}
+
+.delete-btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-btn-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.add-project-btn {
+    min-width: 240px;
+    font-family: 'Syne';
+    padding: 10px 15px 10px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid #1D6154;
+    background-color: #1D6154;
+    color: white;
+    margin: 35px 0 20px 0;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.add-project-btn:hover {
+    background-color: #0E2F28;
+}
+
+.modal-content hr {
+    margin: 0;
+    color: #B3B3B3;
+    width: 420px;
+    font-size: 1px;
+}
+
+.delete-gallery-btn {
+    text-decoration: none;
+    color: #D65353;
+    font-family: 'Syne';
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.card-delete-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: black;
+
+}
+
+.card-delete-btn iframe {
+    width: 9px;
+    height: 9px;
+}
+
+/* edit mod barre*/
+
+
+.edit-mod-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-mod-bar iframe {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.publish-button {
+    font-family: 'Work Sans';
+    padding: 10px 15px 10px 15px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #1D6154;
+    background-color: white;
+    color: black;
+    margin-left: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.connected {
+    margin-top: 110px;
+}
+
+
+/* If connected, hide filter show modal button, if not **/
+
+.hidden {
+    display: none;
+}
+
+
+/*-----------MODAL FORM STYLE-------------*/
+
+.new-project-form {
+    width: 100%;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Work Sans";
+
+}
+
+
+
+.new-project-form div {
+    margin: auto;
+    font-weight: 500;
+}
+.new-project-form label {
+    font-weight: 400;
+}
+.new-project-form input {
+    width: 420px;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.new-project-form > div {
+
+    margin-bottom: 30px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+
+.new-project-form button {
+    width: 180px;
+    height: 35px;
+    margin: auto;
+    font-family: "Syne";
+    border-radius: 25px;
+    background-color: #1D6154;
+    font-weight: 700;
+    color: white;
+    border: none;
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.new-project-form button:hover {
+    background-color: #0E2F28;
+}
+
+.file-box {
+    position: relative;
+    width: 420px;
+    height: 170px;
+    padding: 0;
+    border-radius: 5px;
+    background-color: #E8F1F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-box input {
+    width: 180px;
+    height: 35px;
+    margin: auto;
+    border-radius: 25px;
+    background-color: #1D6154;
+    font-weight: 700;
+    color: white;
+    border: none;
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.file-box iframe {
+    width: 60px;
+    height: 60px;
+}
+
+.file-box p {
+    font-family: "Work sans";
+    color: #444444;
+    font-size: 12px;
+    padding-top: 10px;
+}
+.file-box img {
+    max-height: 170px;
+    position: absolute;
+    top: 0;
+}
+
+/*-*-*-*-*----------------*/
+/* Hide the default button */
+/* Style the label/button element */
+.file-box label {
+    display: inline-block;
+    padding: 12px 0px;
+    width: 175px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #CBD6DC;
+    color: #306685;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+/* Hide the input file field */
+.file-box input[type="file"] {
+    display: none;
+}
+
+
+/*----------FORM SELECT -----------------*/
+
+.new-project-form select {
+    width: 420px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-right: 20px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    background-color: white;
+
+}
+
