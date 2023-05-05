@@ -17,7 +17,7 @@ const btnModal = document.querySelector(".modal-link")
 const closeModalBtn = document.createElement("a")
 closeModalBtn.classList.add("js-close-modal")
 const closeCross = document.createElement("img")
-closeCross.setAttribute("src", "assets/icons/close.png")
+closeCross.setAttribute("src", "assets/icons/close.svg")
 closeModalBtn.appendChild(closeCross)
 
 // Project Modal title
@@ -57,7 +57,7 @@ newProjectForm.classList.add("new-project-form")
 const getBackArrowBtn = document.createElement("a")
 getBackArrowBtn.classList.add("get-back-btn")
 const getBackArrow = document.createElement("img")
-getBackArrow.setAttribute("src", "assets/icons/getBackArrow.png")
+getBackArrow.setAttribute("src", "assets/icons/getBackArrow.svg")
 getBackArrowBtn.appendChild(getBackArrow)
 // Get form title
 const newProjectFormTitle = document.createElement("h2")
@@ -119,15 +119,17 @@ const fileField = document.createElement("input")
 fileField.type = "file"
 fileField.name = "image"
 fileField.accept = "image/jpeg"
-fileField.required = true
+fileField.id = "file-image"
 
 const indications = document.createElement("p")
 indications.innerText = "jpg, png : 4mo max"
 
 // Get the submit button
 const submitBtn = document.createElement("button")
+submitBtn.classList.add("disabled")
 submitBtn.type = "submit"
 submitBtn.textContent = "Envoyer"
+submitBtn.disabled = true
 
 // Get the progress spinner
 const spinner = document.createElement("div")
@@ -143,6 +145,8 @@ function showSpinner() {
 function hideSpinner() {
     spinner.remove()
 }*/
+
+// When an image is selected in the input file field, this will replace the field with a preview of it
 function previewImageDisplay(event) {
     const input = event.target;
     if (input.files && input.files[0]) {
@@ -185,11 +189,26 @@ function createProjectCard(project) {
     const cardDeleteBtnIcon = document.createElement("img")
     cardDeleteBtnIcon.setAttribute('data-id', project.id)
     cardDeleteBtnIcon.classList.add('delete-btn-icon')
-    cardDeleteBtnIcon.setAttribute('src', 'assets/icons/delete.png')
+    cardDeleteBtnIcon.setAttribute('src', 'assets/icons/delete.svg')
     cardDeleteBtn.appendChild(cardDeleteBtnIcon)
+
     // Add event to delete buttons for each project listed in the modal
     cardDeleteBtn.addEventListener('click', deleteProject)
     card.appendChild(cardDeleteBtn)
+
+    // Create the move card button
+    const cardMoveBtn = document.createElement("a")
+    cardMoveBtn.setAttribute('href', '#')
+    cardMoveBtn.setAttribute('data-id', project.id)
+    cardMoveBtn.classList.add('card-move-btn')
+    const cardMoveBtnIcon = document.createElement("img")
+    cardMoveBtnIcon.setAttribute('data-id', project.id)
+    cardMoveBtnIcon.classList.add('move-btn-icon')
+    cardMoveBtnIcon.setAttribute('src', 'assets/icons/move.svg')
+    cardMoveBtn.appendChild(cardMoveBtnIcon)
+
+
+    card.appendChild(cardMoveBtn)
 
     const img = document.createElement("img")
     img.classList.add('project-img')
@@ -206,9 +225,12 @@ function createProjectCard(project) {
     return card
 }
 
+// Stop the propagation of the close event on the close modal button
 function stopPropagation (event) {
     event.stopPropagation()
 }
+
+// Function to open the modal
 function openModal (event) {
     event.preventDefault()
     modal = document.querySelector(event.target.getAttribute('href'))
@@ -230,12 +252,13 @@ function openModal (event) {
     modalContainer.appendChild(deleteGalleryBtn)
     modalContent.appendChild(closeModalBtn)
     modalContent.appendChild(modalContainer)
+
 }
 
 // Keep focus on modal when open
 function focusModal (event) {
     event.preventDefault()
-    let index = focusables.findIndex(f => f === modal.querySelector(':focus'))
+    let index = focusables.findIndex(f => f === modalContent.querySelector(':focus'))
     if(event.shiftKey === true) {
         index--
     }
@@ -258,14 +281,20 @@ function closeModal (event)  {
     projectContainer.innerHTML = ""
     modalContainer.innerHTML = ""
     modalContent.innerHTML = ""
-    modal.style.display = "none"
+
+    // Time out to play the close animations of the modal
+    window.setTimeout(() => {
+        modal.style.display = "none"
+        modal = null
+    }, 500)
+
     previewImage.src = ""
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute('aria-modal')
     modal.removeEventListener("click", closeModal)
-    modal.querySelector('.js-close-modal').removeEventListener('click', closeModal)
-    modal.querySelector('.js-stop-modal').removeEventListener('click', stopPropagation)
-    modal = null
+    closeModalBtn.removeEventListener('click', closeModal)
+    modalContent.removeEventListener('click', stopPropagation)
+
 }
 
 // Back from add project modal to gallery modal
@@ -287,9 +316,34 @@ function getBack (event) {
     modalContent.appendChild(modalContainer)
 }
 
+function handleSubmit (event) {
+    event.preventDefault()
+    const form = document.querySelector('.new-project-form');
+
+        const file = document.querySelector('#file-image').value;
+        const title = document.querySelector('#title').value;
+        const select = newProjectForm.querySelector('select').value;
+        if (file !== '' && title !== '' && select !== "") {
+            submitBtn.classList.remove("disabled")
+            submitBtn.disabled = false
+            newProjectForm.addEventListener("submit", newProject)
+        }
+        else {
+            if(!submitBtn.classList.contains("disabled")) {
+                submitBtn.classList.add("disabled")
+                submitBtn.disabled = true
+                newProjectForm.removeEventListener("submit", newProject)
+            }
+        }
+}
+
+
 // Create a new project
 async function newProject (event) {
     event.preventDefault()
+
+    // Test
+
     const form = document.querySelector(".new-project-form");
         const formData = new FormData(form);
 
@@ -338,7 +392,7 @@ function openAddProjectModal (event) {
     newProjectForm.appendChild(submitBtn)
 
     modalContainer.appendChild(newProjectFormTitle)
-    newProjectForm.addEventListener("submit", newProject)
+    newProjectForm.addEventListener("change", handleSubmit)
     modalContainer.appendChild(newProjectForm)
 }
 

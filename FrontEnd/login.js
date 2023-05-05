@@ -72,9 +72,9 @@ async function login(formData) {
         // If the response indicates an error, display an appropriate error message to the user
         if (!response.ok) {
             if (response.status === 401) {
-                displayError("Invalid email or password");
+                displayError("Mot de passe incorrect");
             } else {
-                displayError("Invalid email or password");
+                displayError("Aucun utilisateur ne correspond");
                 throw new Error(`Failed to login: ${response.statusText}`);
             }
             return;

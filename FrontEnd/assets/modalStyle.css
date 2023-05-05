@@ -1,4 +1,36 @@
 
+/*------------MODAL ANIMATIONS--------*/
+@keyframes fadeIn {
+    from { opacity: 0}
+    to { opacity: 1}
+    
+}
+
+@keyframes slideFromTop {
+    from {transform: translateY(-50px)}
+    to {transform: translateY(0)}
+}
+
+@keyframes fadeOut {
+    from { opacity: 1}
+    to { opacity: 0}
+
+}
+
+@keyframes slideFromBot {
+    from {transform: translateY(0px)}
+    to {transform: translateY(50px)}
+}
+
+.modal[aria-hidden= "true"] {
+    animation: fadeOut .5s both;
+}
+
+.modal[aria-hidden= "true"] .modal-content {
+    animation: slideToBot .5s both;
+}
+
+/*----------------MODAL CSS-------------------*/
 
 
 .modal-link {
@@ -14,7 +46,7 @@
     padding-left: 30px;
 }
 
-.modal-link iframe {
+.modal-link img {
     width: 18px;
     height: 18px;
     margin-right: 10px;
@@ -31,6 +63,7 @@
     justify-content: center;
     align-items: center;
 
+    animation: fadeIn .5s both;
 }
 
 .modal-content {
@@ -43,7 +76,12 @@
     flex-flow: column nowrap;
     position: relative;
 
+    animation: slideFromTop .5s both;
+
+
 }
+
+
 
 .project-modal-title {
     font-family: 'Work Sans';
@@ -173,14 +211,37 @@
     height: 20px;
     border-radius: 3px;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-btn-icon {
+    width: 13px;
+    height: 13px;
+}
+
+
+.card-move-btn {
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: black;
+    display: none;
 
 }
 
-.card-delete-btn iframe {
-    width: 9px;
-    height: 9px;
-}
 
+
+.modal-card:hover .card-move-btn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* edit mod barre*/
 
 
@@ -326,7 +387,7 @@
     top: 0;
 }
 
-/*-*-*-*-*----------------*/
+/*---------STYLE INPUT FILE FIELD----------*/
 /* Hide the default button */
 /* Style the label/button element */
 .file-box label {
@@ -362,3 +423,20 @@
 
 }
 
+
+/*-----------EMPTY FIELD ALERT----------*/
+
+.empty-field {
+    border: 2px solid red;
+    box-shadow: 0px 4px 14px rgba(255, 0, 0, 0.2);
+}
+
+.empty {
+    color: red; /* LABEL TEXT */
+}
+
+
+.disabled {
+    background-color: #A7A7A7!important;
+    cursor: default!important;
+}
