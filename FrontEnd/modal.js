@@ -328,33 +328,9 @@ function handleSubmit (event) {
 }
 
 
-// Create a new project
-async function newProject (event) {
-    event.preventDefault()
-
-    // Test
-
-    const form = document.querySelector(".new-project-form");
-        const formData = new FormData(form);
-
-        const response = await fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Token ${localStorage.userToken}`
-            },
-            body: formData
-        })
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        window.location.href = "index.html"
-}
-
 // Open a form in a modal to add a new project
 function openAddProjectModal (event) {
     event.preventDefault()
-
     projectContainer.innerHTML = ""
     modalContainer.innerHTML = ""
 
@@ -386,20 +362,72 @@ function openAddProjectModal (event) {
     modalContainer.appendChild(newProjectForm)
 }
 
-// Function to delete a project from the html file
-function deleteProject (event) {
+
+// Create a new project
+async function newProject (event) {
     event.preventDefault()
 
+    // Test
 
+    const form = document.querySelector(".new-project-form");
+    const formData = new FormData(form);
+
+    const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Token ${localStorage.userToken}`
+        },
+        body: formData
+    })
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    buildGallery()
+
+    projectContainer.innerHTML = ""
+    modalContainer.innerHTML = ""
+    modalContent.innerHTML = ""
+
+    // Time out to play the close animations of the modal
+    window.setTimeout(() => {
+        modal.style.display = "none"
+        modal = null
+    }, 500)
+
+    // Reset the form 
+    previewImage.src = ""
+    newProjectForm.reset()
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('aria-modal')
+    modal.removeEventListener("click", closeModal)
+    closeModalBtn.removeEventListener('click', closeModal)
+    modalContent.removeEventListener('click', stopPropagation)
+}
+
+
+// Function to delete a project
+async function deleteProject (event) {
+    event.preventDefault()
     const projectId = event.target.getAttribute('data-id')
-    projectToDelete.push(projectId)
-    event.target.parentNode.parentNode.remove()
+    const response = await fetch("http://localhost:5678/api/works/"+ projectId, {
+        method: "DELETE",
+        headers: {
+            'Authorization' : `Token ${localStorage.userToken}`
+        }
+    })
+
+    if(!response.ok) {
+        throw new Error(`failed : ${response.statusText}`)
+    }
+
+    // Delete from modal
+    modal.querySelector(`.modal-card[data-id="${projectId}"]`).remove()
     const indexProject = document.querySelector(`figure[data-id="${projectId}"]`)
     indexProject.remove()
 
     // Prevent deleted project to come back if using the filters
     const index = posts.findIndex(post => post.id == projectId)
-
     if (index !== -1) {
         posts.splice(index, 1)
     }

@@ -29,8 +29,9 @@ function buildEditMod () {
 
         const publishBtn = document.createElement('button')
         publishBtn.classList.add('publish-button')
+        publishBtn.setAttribute("disabled", "true")
         publishBtn.innerText = "publier les changements"
-        publishBtn.addEventListener("click", applyModification)
+        //publishBtn.addEventListener("click", applyModification)  -- WORKS WITH THE PREBUILD FUNCTION
 
 
         const editIcon = document.createElement('iframe')
@@ -49,6 +50,8 @@ function hiddenClass () {
     btnModal.classList.toggle('hidden')
 
 }
+
+// Set the graphical adjustment to UI if connected as admin
 function connected () {
 
     // Display logout button if user logged in
@@ -62,7 +65,8 @@ function connected () {
     }
 }
 
-async function applyModification (event) {
+// PREBUILD OF THE PUBLISH BUTTON FUNCTION
+/*async function applyModification (event) {
     event.preventDefault()
     if(projectToDelete.length !== 0) {
         for (project of projectToDelete) {
@@ -81,6 +85,6 @@ async function applyModification (event) {
 
     }
 
-}
+}*/
 
 connected()
