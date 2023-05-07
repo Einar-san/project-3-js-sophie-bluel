@@ -3,7 +3,6 @@
 @keyframes fadeIn {
     from { opacity: 0}
     to { opacity: 1}
-    
 }
 
 @keyframes slideFromTop {
@@ -54,6 +53,7 @@
 
 .modal {
     position: fixed;
+    z-index: 10000;
     top: 0;
     left: 0;
     width: 100%;
@@ -80,8 +80,6 @@
 
 
 }
-
-
 
 .project-modal-title {
     font-family: 'Work Sans';
@@ -113,6 +111,7 @@
     align-content: center;
     align-items: center;
 }
+
 .modal-container h2 {
     font-family: "Work Sans";
     font-size: 26px;
@@ -134,8 +133,6 @@
     align-items: flex-start;
     flex-flow: row wrap;
 }
-
-
 
 .modal-card {
     position: relative;
@@ -221,7 +218,6 @@
     height: 13px;
 }
 
-
 .card-move-btn {
     position: absolute;
     right: 30px;
@@ -234,19 +230,16 @@
 
 }
 
-
-
 .modal-card:hover .card-move-btn {
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-/* edit mod barre*/
-
-
+/*--------------- EDIT MOD----------*/
 .edit-mod-bar {
     position: fixed;
+    z-index: 1000000;
     top: 0;
     left: 0;
     right: 0;
@@ -281,17 +274,11 @@
 .connected {
     margin-top: 110px;
 }
-
-
-/* If connected, hide filter show modal button, if not **/
-
+/*-----------------IF ADMIN ADJUSTMENTS------------**/
 .hidden {
     display: none;
 }
-
-
 /*-----------MODAL FORM STYLE-------------*/
-
 .new-project-form {
     width: 100%;
     display:flex;
@@ -302,15 +289,15 @@
 
 }
 
-
-
 .new-project-form div {
     margin: auto;
     font-weight: 500;
 }
+
 .new-project-form label {
     font-weight: 400;
 }
+
 .new-project-form input {
     width: 420px;
     height: 50px;
@@ -325,7 +312,6 @@
     display: flex;
     flex-flow: column nowrap;
 }
-
 
 .new-project-form button {
     width: 180px;
@@ -381,15 +367,14 @@
     font-size: 12px;
     padding-top: 10px;
 }
+
 .file-box img {
     max-height: 170px;
     position: absolute;
     top: 0;
 }
 
-/*---------STYLE INPUT FILE FIELD----------*/
-/* Hide the default button */
-/* Style the label/button element */
+/*---------STYLE INPUT FILE FIELD LABEL AS A BUTTON----------*/
 .file-box label {
     display: inline-block;
     padding: 12px 0px;
@@ -402,15 +387,11 @@
     border-radius: 25px;
     font-size: 14px;
 }
-
-/* Hide the input file field */
+/*---------------- HIDE THE INPUT FILE FIELD ---------------*/
 .file-box input[type="file"] {
     display: none;
 }
-
-
 /*----------FORM SELECT -----------------*/
-
 .new-project-form select {
     width: 420px;
     height: 50px;
@@ -422,20 +403,7 @@
     background-color: white;
 
 }
-
-
-/*-----------EMPTY FIELD ALERT----------*/
-
-.empty-field {
-    border: 2px solid red;
-    box-shadow: 0px 4px 14px rgba(255, 0, 0, 0.2);
-}
-
-.empty {
-    color: red; /* LABEL TEXT */
-}
-
-
+/*----------DISABLE ADD PROJECT BUTTON----------*/
 .disabled {
     background-color: #A7A7A7!important;
     cursor: default!important;

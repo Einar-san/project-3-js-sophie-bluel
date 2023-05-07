@@ -34,6 +34,7 @@ const articles =  async () => {
 function createFigure(post) {
 
     const figure = document.createElement('figure')
+    figure.setAttribute("style", "display:none")
     figure.setAttribute('data-id', post.id)
     const img = document.createElement('img')
     img.src = post.imageUrl
@@ -51,14 +52,18 @@ function clearGallery () {
     gallery.innerHTML = ''
 }
 
-// Add the article figures to the gallery container
-async function createArticles () {
+// Build gallery
+async function buildGallery () {
     await articles()
     clearGallery()
     createFilters(posts)
         for(let post of posts) {
             gallery.append(createFigure(post))
         }
+    const animedFigures = gallery.querySelectorAll("figure")
+    for(figure of animedFigures) {
+        figure.setAttribute("style", "display:block")
+    }
 }
 
 // Generate the filtered gallery
@@ -66,6 +71,10 @@ async function filterFunction (filteredPosts) {
     clearGallery()
     for(let post of filteredPosts) {
         gallery.append(createFigure(post))
+    }
+    const animedFigures = gallery.querySelectorAll("figure")
+    for(figure of animedFigures) {
+        figure.setAttribute("style", "display:block")
     }
 }
 
@@ -129,7 +138,7 @@ async function createFilterEvent (className) {
 
 
 // Generate gallery
-createArticles ()
+buildGallery ()
 
 
 

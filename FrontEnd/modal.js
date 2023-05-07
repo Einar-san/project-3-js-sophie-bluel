@@ -386,22 +386,11 @@ function openAddProjectModal (event) {
     modalContainer.appendChild(newProjectForm)
 }
 
-// Add event to the button that opens the modal
-btnModal.addEventListener('click', openModal)
-
-// Add event to listen to the keys ESC, to close the modal
-window.addEventListener('keydown', function (e) {
-    if(e.key === "Escape" || e.key === "Esc") {
-        closeModal(e)
-    }
-    if (e.key === "Tab" && modal !== null) {
-        focusModal(e)
-    }
-})
-
 // Function to delete a project from the html file
 function deleteProject (event) {
     event.preventDefault()
+
+
     const projectId = event.target.getAttribute('data-id')
     projectToDelete.push(projectId)
     event.target.parentNode.parentNode.remove()
@@ -415,6 +404,22 @@ function deleteProject (event) {
         posts.splice(index, 1)
     }
 }
+
+
+// Add event to the button that opens the modal
+btnModal.addEventListener('click', openModal)
+
+// Add event to listen to the keys ESC, to close the modal
+window.addEventListener('keydown', function (e) {
+    if(e.key === "Escape" || e.key === "Esc") {
+        closeModal(e)
+    }
+    if (e.key === "Tab" && modal !== null) {
+        focusModal(e)
+    }
+})
+
+
 
 // Jump to the add project modal form
 addProjectBtn.addEventListener("click", openAddProjectModal)
