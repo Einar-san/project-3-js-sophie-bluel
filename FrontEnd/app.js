@@ -1,9 +1,16 @@
-let wrapper = document.querySelector("#gallery")
+// Get the gallery container
+let gallery = document.querySelector("#gallery")
+
+// Get the filter container
 const filters = document.querySelector(".filters")
+
+// The articles fetched from the server will be stored here
 let posts = []
+
+// The categories fetched from the server will be stored here
 let category = []
 
-
+// Get the articles from the server
 const articles =  async () => {
     try {
         const res = await fetch("http://localhost:5678/api/works", {
@@ -23,7 +30,7 @@ const articles =  async () => {
     }
 }
 
-
+// Function to create every article figure
 function createFigure(post) {
 
     const figure = document.createElement('figure')
@@ -39,41 +46,38 @@ function createFigure(post) {
     return figure
 }
 
-function clearGallery (wrapper) {
-    wrapper.innerHTML = ''
+// Function to clear the gallery
+function clearGallery () {
+    gallery.innerHTML = ''
 }
+
+// Add the article figures to the gallery container
 async function createArticles () {
     await articles()
-    clearGallery(wrapper)
-    const loader = document.createElement('figure')
-    loader.innerText = 'chargement...'
-    wrapper.append(loader)
-
+    clearGallery()
     createFilters(posts)
-
-        loader.remove()
         for(let post of posts) {
-            wrapper.append(createFigure(post))
+            gallery.append(createFigure(post))
         }
 }
+
+// Generate the filtered gallery
 async function filterFunction (filteredPosts) {
-    clearGallery(wrapper)
-    const loader = document.createElement('figure')
-    loader.innerText = 'chargement...'
-    wrapper.append(loader)
-
-
-    loader.remove()
+    clearGallery()
     for(let post of filteredPosts) {
-        wrapper.append(createFigure(post))
+        gallery.append(createFigure(post))
     }
 }
+
+// Add class Active to filters when clicked
 function addFilterClass (filter) {
     let activeFilter = document.querySelector('.active')
     activeFilter.classList.remove('active')
     activeFilter = document.querySelector('.'+ filter)
     activeFilter.classList.add('active')
 }
+
+// Create filter buttons
 async function createFilters (posts) {
 
     for (post of posts) {
@@ -102,6 +106,7 @@ async function createFilters (posts) {
 
 }
 
+// Create an array of articles that match the filter, this array will be used to display the filtered articles
 async function createFilterEvent (className) {
     let classValid = className.replace(/[ &]/g, "-")
     document.querySelector('.'+classValid).addEventListener('click', ()=> {
@@ -123,7 +128,7 @@ async function createFilterEvent (className) {
 }
 
 
-
+// Generate gallery
 createArticles ()
 
 

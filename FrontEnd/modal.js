@@ -4,8 +4,6 @@ let projectToDelete = []
 
 // Get the modal
 let modal = null
-const focusableSelector = 'button, a, input, textarea'
-let focusables = []
 const modalContainer = document.createElement("div")
 modalContainer.classList.add("modal-container")
 const modalContent = document.querySelector(".modal-content")
@@ -16,6 +14,7 @@ const btnModal = document.querySelector(".modal-link")
 // Close Modal Button
 const closeModalBtn = document.createElement("a")
 closeModalBtn.classList.add("js-close-modal")
+closeModalBtn.setAttribute("tabindex", "1")
 const closeCross = document.createElement("img")
 closeCross.setAttribute("src", "assets/icons/close.svg")
 closeModalBtn.appendChild(closeCross)
@@ -131,21 +130,6 @@ submitBtn.type = "submit"
 submitBtn.textContent = "Envoyer"
 submitBtn.disabled = true
 
-// Get the progress spinner
-const spinner = document.createElement("div")
-spinner.classList.add("spinner")
-
-/*
-// Function to show the progress spinner
-function showSpinner() {
-    modalCards.appendChild(spinner)
-}
-
-// Function to hide the progress spinner
-function hideSpinner() {
-    spinner.remove()
-}*/
-
 // When an image is selected in the input file field, this will replace the field with a preview of it
 function previewImageDisplay(event) {
     const input = event.target;
@@ -197,7 +181,7 @@ function createProjectCard(project) {
     card.appendChild(cardDeleteBtn)
 
     // Create the move card button
-    const cardMoveBtn = document.createElement("a")
+    const cardMoveBtn = document.createElement("div")
     cardMoveBtn.setAttribute('href', '#')
     cardMoveBtn.setAttribute('data-id', project.id)
     cardMoveBtn.classList.add('card-move-btn')
@@ -233,8 +217,7 @@ function stopPropagation (event) {
 // Function to open the modal
 function openModal (event) {
     event.preventDefault()
-    modal = document.querySelector(event.target.getAttribute('href'))
-    focusables = Array.from(modal.querySelectorAll(focusableSelector))
+    modal = document.querySelector('#modal')
     modal.style.display = null
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
@@ -258,20 +241,27 @@ function openModal (event) {
 // Keep focus on modal when open
 function focusModal (event) {
     event.preventDefault()
-    let index = focusables.findIndex(f => f === modalContent.querySelector(':focus'))
-    if(event.shiftKey === true) {
+
+    const focusables = [...modalContent.querySelectorAll('a, button, input, textarea, select')];
+    let index = focusables.indexOf(document.activeElement);
+    if (focusables.indexOf(document.activeElement) === -1) index =0
+    // rest of your code
+    if(event.shiftKey === true && index != 0) {
         index--
+        focusables[index].focus()
     }
-    else {
-        index++
-    }
-    if(index >= focusables.length) {
-        index = 0
-    }
-    if(index < 0) {
+    else if (event.shiftKey === true && index === 0) {
         index = focusables.length - 1
+        focusables[index].focus()
     }
-    focusables[index].focus()
+    else if (event.shiftKey === false && index >= focusables.length-1) {
+        index = 0
+        focusables[index].focus()
+    }
+    else if (event.shiftKey === false && index < focusables.length){
+        index++
+        focusables[index].focus()
+    }
 }
 
 // Close modal and clear it content
