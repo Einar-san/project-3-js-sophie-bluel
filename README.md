@@ -34,7 +34,7 @@ This will launch the backend server, and it will be accessible at a specified ad
 
 ## Usage
 
-At this point, you should have both the backend and frontend servers running, allowing you to interact with the project. If you encounter any issues or have questions, refer to the project documentation or seek assistance from the project team.
+At this point, you should have both the backend and frontend servers running, allowing you to interact with the project. If you encounter any issues or have questions, refer to the project documentation.(Openclassrooms's Backend api)
 
 ## Troubleshooting
 
